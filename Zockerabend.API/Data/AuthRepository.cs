@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,9 +44,9 @@ namespace Zockerabend.API.Data
             }
         }
 
-        public Task<bool> UserExists(string email)
+        public async Task<bool> UserExists(string username)
         {
-            throw new NotImplementedException();
+            return await context.Users.AnyAsync(u => u.Username == username);
         }
     }
 }
