@@ -31,6 +31,11 @@ namespace Zockerabend.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] UserToRegisterDto userToRegister)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             userToRegister.Username = userToRegister.Username.ToLower();
 
             if (await repo.UserExists(userToRegister.Username))
